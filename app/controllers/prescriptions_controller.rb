@@ -20,6 +20,14 @@ class PrescriptionsController < ApplicationController
 
   end
 
+  def destroy
+    @patient = Patient.find(params[:patient_id])
+    @prescription = @patient.prescriptions.find(params[:id])
+    @prescription.destroy
+    flash[:notice] = "Your perscription has been removed"
+    redirect_to @patient
+  end
+
   private
 
   def allowed_params
